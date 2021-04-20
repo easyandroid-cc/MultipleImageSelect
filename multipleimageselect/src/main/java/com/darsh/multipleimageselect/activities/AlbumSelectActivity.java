@@ -52,7 +52,8 @@ public class AlbumSelectActivity extends HelperActivity {
     private final String[] projection = new String[]{
             MediaStore.Images.Media.BUCKET_ID,
             MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
-            MediaStore.Images.Media.DATA };
+            MediaStore.Images.Media.DATA,
+            MediaStore.Images.Media._ID};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -263,6 +264,7 @@ public class AlbumSelectActivity extends HelperActivity {
                     long albumId = cursor.getLong(cursor.getColumnIndex(projection[0]));
                     String album = cursor.getString(cursor.getColumnIndex(projection[1]));
                     String image = cursor.getString(cursor.getColumnIndex(projection[2]));
+                    long id = cursor.getLong(cursor.getColumnIndex(projection[2]));
 
                     if (!albumSet.contains(albumId)) {
                         /*
@@ -273,7 +275,7 @@ public class AlbumSelectActivity extends HelperActivity {
                          */
                         file = new File(image);
                         if (file.exists()) {
-                            temp.add(new Album(albumId,album, image));
+                            temp.add(new Album(id, album, image));
                             albumSet.add(albumId);
                         }
                     }
