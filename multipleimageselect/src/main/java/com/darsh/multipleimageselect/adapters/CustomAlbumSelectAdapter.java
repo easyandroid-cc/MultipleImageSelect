@@ -6,9 +6,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
+import com.darsh.multipleimageselect.MultipleimageSelectOption;
 import com.darsh.multipleimageselect.R;
 import com.darsh.multipleimageselect.models.Album;
+import com.darsh.multipleimageselect.util.Imageloader;
 
 import java.util.ArrayList;
 
@@ -41,13 +43,14 @@ public class CustomAlbumSelectAdapter extends CustomGenericAdapter<Album> {
         viewHolder.imageView.getLayoutParams().height = size;
 
         viewHolder.textView.setText(arrayList.get(position).name);
-        Glide.with(context)
-                .load(arrayList.get(position).cover)
-                .placeholder(R.drawable.image_placeholder).centerCrop().into(viewHolder.imageView);
+        MultipleimageSelectOption.getInstance().getImageloader().
+        loadImage(context,arrayList.get(position).id,R.drawable.image_placeholder,viewHolder.imageView);
+//        Glide.with(context)
+//                .load(arrayList.get(position).cover)
+//                .placeholder(R.drawable.image_placeholder).centerCrop().into(viewHolder.imageView);
 
         return convertView;
     }
-
     private static class ViewHolder {
         public ImageView imageView;
         public TextView textView;

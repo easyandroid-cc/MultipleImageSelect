@@ -1,0 +1,19 @@
+apply plugin: 'com.novoda.bintray-release'
+//如果你开源库中有中文注释在moudel的build.gradle加入格式
+allprojects {
+    repositories {
+        jcenter()
+    }
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+    }
+}
+publish {
+    userOrg = 'cgpllx'      //bintray注册的用户名
+    groupId = 'cc.easyandroid'         //compile引用时的第1部分groupId
+    artifactId = 'MultipleImageSelect'     //compile引用时的第2部分项目名
+    publishVersion = '1.0.1'    //compile引用时的第3部分版本号
+    desc = 'Very convenient to use MultipleImageSelect'
+    website = 'https://github.com/easyandroid-cc/MultipleImageSelect'
+}

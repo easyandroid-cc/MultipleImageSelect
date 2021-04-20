@@ -6,9 +6,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.darsh.multipleimageselect.MultipleimageSelectOption;
 import com.darsh.multipleimageselect.R;
 import com.darsh.multipleimageselect.models.Image;
+import com.darsh.multipleimageselect.util.Imageloader;
 
 import java.util.ArrayList;
 
@@ -51,14 +52,15 @@ public class CustomImageSelectAdapter extends CustomGenericAdapter<Image> {
             viewHolder.view.setAlpha(0.0f);
             ((FrameLayout) convertView).setForeground(null);
         }
+        //android o 沙盒问题，不能直接访问外部文件
+        MultipleimageSelectOption.getInstance().getImageloader().loadImage(context,arrayList.get(position).id,R.drawable.image_placeholder,viewHolder.imageView);
 
-        Glide.with(context)
-                .load(arrayList.get(position).path)
-                .placeholder(R.drawable.image_placeholder).into(viewHolder.imageView);
+//        Glide.with(context)
+//                .load(arrayList.get(position).path)
+//                .placeholder(R.drawable.image_placeholder).into(viewHolder.imageView);
 
         return convertView;
     }
-
     private static class ViewHolder {
         public ImageView imageView;
         public View view;
